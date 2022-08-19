@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  ailo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/ailo/src
+    environment:
+      ENVIRONMENT: development
+    networks:
+      - backend
+
+# If have time, caching and db.
+networks:
+  backend:
+    name: ailo
+    driver: bridge
