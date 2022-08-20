@@ -1,4 +1,4 @@
-from zombie_world import zombie_world
+from zombie_world import _zombie_move, zombie_world
 from zombie_objects import Position, Grid, Creature, Move
 import pytest
 
@@ -28,7 +28,7 @@ import pytest
             ],
             Move(Grid(4).dimension, "u"),
             [],
-            2,
+            4,
         ),
         (
             Grid(5),
@@ -40,7 +40,7 @@ import pytest
             ],
             Move(Grid(4).dimension, "rruuudr"),
             [],
-            8,
+            10,
         ),
     ],
 )
@@ -83,3 +83,33 @@ def test_zombie_world_failed_with_invalid_position():
         Position(Grid(4).dimension, 4, 2)
 
     assert str(exc.value) == "Position is invalid"
+
+
+def test_zombie_world_no_creatures_survived():
+    _, zombies, creatures = _zombie_move(
+        grid=Grid(2),
+        initial_position=Position(Grid(2).dimension, x=0, y=0),
+        creatures=[Creature(Grid(2).dimension, x=1, y=1)],
+        move=Move(Grid(2).dimension, "ru"),
+        messages=[],
+    )
+    assert len(zombies) == 1
+    assert zombies[0].location == (1, 1)
+    assert len(creatures) == 0
+
+
+def test_zombie_world_one_creature_survived():
+    _, zombies, survived_creatures = _zombie_move(
+        grid=Grid(5),
+        initial_position=Position(Grid(5).dimension, x=0, y=0),
+        creatures=[
+            Creature(Grid(5).dimension, x=2, y=2),
+            Creature(Grid(5).dimension, x=2, y=0),
+        ],
+        move=Move(Grid(5).dimension, "rdrd"),
+        messages=[],
+    )
+    assert len(zombies) == 1
+    assert zombies[0].location == (2, 2)
+    assert len(survived_creatures) == 1
+    assert survived_creatures[0].location == (2, 0)

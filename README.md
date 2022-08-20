@@ -70,15 +70,15 @@ POST http://127.0.0.1:3000/zombie_world/start
 ```json
 {
     "messages": [
-        "zombie 0 moved from (3, 1) to (0, 1)",
+        "Zombie 0 moved from (3, 1) to (0, 1)",
         "Creature got infected at - (0, 1)",
-        "zombie 0 moved from (0, 1) to (0, 2)",
-        "zombie 0 moved from (0, 2) to (1, 2)",
+        "Zombie 0 moved from (0, 1) to (0, 2)",
+        "Zombie 0 moved from (0, 2) to (1, 2)",
         "Creature got infected at - (1, 2)",
-        "zombie 0 moved from (1, 2) to (1, 1)",
+        "Zombie 0 moved from (1, 2) to (1, 1)",
         "Creature got infected at - (1, 1)",
         "No leftover Creatures :'(",
-        "zombie 1 moved from (0, 1) to (1, 1)",
+        "Zombie 1 moved from (0, 1) to (1, 1)",
         ...
         ...
         ...
