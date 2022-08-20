@@ -26,12 +26,12 @@ def _zombie_move(
     prepare_for_next_step = initial_position
     new_messages = messages
     new_zombies = []
-    safe_creatures = creatures
+    safe_creatures = creatures  
     for _, step in enumerate(move.steps):
         if step == "r":
             create_new_move = Position(
                 grid.dimension,
-                prepare_for_next_step.x + 1,
+                0 if prepare_for_next_step.x + 1 == grid.dimension else prepare_for_next_step.x + 1,
                 prepare_for_next_step.y,
             )
             has_moved = create_new_move
@@ -52,7 +52,7 @@ def _zombie_move(
             create_new_move = Position(
                 grid.dimension,
                 prepare_for_next_step.x,
-                prepare_for_next_step.y - 1,
+                0 if prepare_for_next_step.y - 1 == grid.dimension else prepare_for_next_step.y + 1,
             )
             has_moved = create_new_move
             new_messages.append(
@@ -73,7 +73,7 @@ def _zombie_move(
             create_new_move = Position(
                 grid.dimension,
                 prepare_for_next_step.x,
-                prepare_for_next_step.y + 1,
+                grid.dimension - 1 if prepare_for_next_step.y - 1 == -1 else prepare_for_next_step.y - 1,
             )
             has_moved = create_new_move
             new_messages.append(
@@ -122,15 +122,15 @@ def zombie_world(
         )
         if len(zombies) != 0:
             for i in range(len(zombies)):
+                print(len(zombies))
                 _zombie_move(
                     grid=grid,
-                    initial_position=position,
+                    initial_position=Position(grid.dimension, zombies[i].x, zombies[i].y),
                     creatures=[],
                     move=move,
                     messages=messages,
                     round=i + 1,
                 )
-                zombies.pop()
     except Exception as e:
         raise Exception(e)
     return messages

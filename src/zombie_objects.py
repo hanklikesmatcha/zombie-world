@@ -11,8 +11,8 @@ class Grid:
 class Position(Grid):
     def __init__(self, dimension: int, x: int, y: int):
         super().__init__(dimension=dimension)
-        if x > self.row or x < 0 or y > self.col or y < 0:
-            raise Exception("Position is not in the grid")
+        if x >= self.row or x < 0 or y >= self.col or y < 0:
+            raise Exception("Position is invalid")
         self.x = x
         self.y = y
 
