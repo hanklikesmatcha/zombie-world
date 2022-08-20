@@ -60,35 +60,35 @@ POST http://127.0.0.1:3000/zombie_world/start
 ## Request
 ```json
 {
-    "dimension": 5,
-    "position" : {"x": 0 , "y": 0},
-    "creatures": [[0, 1], [1, 1], [3, 0]],
-    "moves": "uurdrd"
+    "dimension": 4,
+    "position" : {"x": 3 , "y": 1},
+    "creatures": [[0, 1], [1, 2], [1, 1]],
+    "moves": "rdru"
 }
 ```
 ## Response
 ```json
 {
     "messages": [
-        "zombie 0 moved from (0, 0) to (0, 1)",
+        "zombie 0 moved from (3, 1) to (0, 1)",
         "Creature got infected at - (0, 1)",
         "zombie 0 moved from (0, 1) to (0, 2)",
         "zombie 0 moved from (0, 2) to (1, 2)",
+        "Creature got infected at - (1, 2)",
         "zombie 0 moved from (1, 2) to (1, 1)",
         "Creature got infected at - (1, 1)",
-        "zombie 0 moved from (1, 1) to (2, 1)",
-        "zombie 0 moved from (2, 1) to (2, 0)",
-        "zombie 1 moved from (0, 0) to (0, 1)",
-        "zombie 1 moved from (0, 1) to (0, 2)",
-        "zombie 1 moved from (0, 2) to (1, 2)",
-        "zombie 1 moved from (1, 2) to (1, 1)",
-        "zombie 1 moved from (1, 1) to (2, 1)",
-        "zombie 1 moved from (2, 1) to (2, 0)",
-        "zombie 2 moved from (0, 0) to (0, 1)",
-        "zombie 2 moved from (0, 1) to (0, 2)",
-        ...
-        ...
-        ...
+        "zombie 1 moved from (0, 1) to (1, 1)",
+        "zombie 1 moved from (1, 1) to (1, 2)",
+        "zombie 1 moved from (1, 2) to (2, 2)",
+        "zombie 1 moved from (2, 2) to (2, 1)",
+        "zombie 2 moved from (1, 2) to (2, 2)",
+        "zombie 2 moved from (2, 2) to (2, 3)",
+        "zombie 2 moved from (2, 3) to (3, 3)",
+        "zombie 2 moved from (3, 3) to (3, 2)",
+        "zombie 3 moved from (1, 1) to (2, 1)",
+        "zombie 3 moved from (2, 1) to (2, 2)",
+        "zombie 3 moved from (2, 2) to (3, 2)",
+        "zombie 3 moved from (3, 2) to (3, 1)"
     ]
 }
 ```
@@ -115,7 +115,11 @@ $ docker ps // Check IMAGE ailo_ailo is on the list
 ```
 $ docker exec -it ailo_ailo_1 bash
 ```
+#### Run the test locally
+```
+$ pytest zombie_world.py::<test_name> // or just run pytest to run all the tests
+```
 #### Reformat 
 ```
-# black <file_name> // or just '.' to reformat all the files
+$ black <file_name> // or just '.' to reformat all the files
 ```
