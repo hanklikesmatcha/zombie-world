@@ -16,7 +16,7 @@ import pytest
             ],
             Move(Grid(4).dimension, "rdru"),
             [],
-            19,
+            23,
         ),
         (
             Grid(4),
@@ -28,7 +28,7 @@ import pytest
             ],
             Move(Grid(4).dimension, "u"),
             [],
-            1,
+            2,
         ),
         (
             Grid(5),
@@ -40,7 +40,7 @@ import pytest
             ],
             Move(Grid(4).dimension, "rruuudr"),
             [],
-            7,
+            8,
         ),
     ],
 )
@@ -72,14 +72,14 @@ def test_zombie_world_failed_with_position_out_of_grid():
 
 
 def test_zombie_world_failed_with_creature_outside_the_grid():
-    with pytest.raises(Exception) as exc: 
-            Creature(Grid(4).dimension, 5, 2)
+    with pytest.raises(Exception) as exc:
+        Creature(Grid(4).dimension, 5, 2)
 
     assert str(exc.value) == "Creature is not in the grid"
 
 
 def test_zombie_world_failed_with_invalid_position():
-    with pytest.raises(Exception) as exc: 
-            Position(Grid(4).dimension, 4, 2)
-            
+    with pytest.raises(Exception) as exc:
+        Position(Grid(4).dimension, 4, 2)
+
     assert str(exc.value) == "Position is invalid"

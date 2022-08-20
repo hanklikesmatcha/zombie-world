@@ -26,12 +26,15 @@ def _zombie_move(
     prepare_for_next_step = initial_position
     new_messages = messages
     new_zombies = []
-    safe_creatures = creatures  
+    safe_creatures = creatures
+    safe_creatures_for_this_round = []
     for _, step in enumerate(move.steps):
         if step == "r":
             create_new_move = Position(
                 grid.dimension,
-                0 if prepare_for_next_step.x + 1 == grid.dimension else prepare_for_next_step.x + 1,
+                0
+                if prepare_for_next_step.x + 1 == grid.dimension
+                else prepare_for_next_step.x + 1,
                 prepare_for_next_step.y,
             )
             has_moved = create_new_move
@@ -52,7 +55,9 @@ def _zombie_move(
             create_new_move = Position(
                 grid.dimension,
                 prepare_for_next_step.x,
-                0 if prepare_for_next_step.y - 1 == grid.dimension else prepare_for_next_step.y + 1,
+                0
+                if prepare_for_next_step.y - 1 == grid.dimension
+                else prepare_for_next_step.y + 1,
             )
             has_moved = create_new_move
             new_messages.append(
@@ -62,6 +67,7 @@ def _zombie_move(
             infected_creatures, safe_creatures, sos_messages = _check_infection(
                 creatures=safe_creatures, position=has_moved
             )
+
             for z in infected_creatures:
                 if z:
                     new_zombies.append(z)
@@ -73,7 +79,9 @@ def _zombie_move(
             create_new_move = Position(
                 grid.dimension,
                 prepare_for_next_step.x,
-                grid.dimension - 1 if prepare_for_next_step.y - 1 == -1 else prepare_for_next_step.y - 1,
+                grid.dimension - 1
+                if prepare_for_next_step.y - 1 == -1
+                else prepare_for_next_step.y - 1,
             )
             has_moved = create_new_move
             new_messages.append(
@@ -89,6 +97,15 @@ def _zombie_move(
             for m in sos_messages:
                 if m:
                     new_messages.append(m)
+    if len(safe_creatures_for_this_round) == 0:
+        message_from_creatures = f"No leftover Creatures :'("
+        new_messages.append(message_from_creatures)
+    else:
+        for c in safe_creatures_for_this_round:
+            message_from_creatures = (
+                f"Creature located on {c.location} survived this round."
+            )
+            new_messages.append(message_from_creatures)
 
     return new_messages, new_zombies
 
@@ -111,7 +128,6 @@ def zombie_world(
     :parm messages: A list of messages. To document all the Zombie's move and where the Creatures become a Zombie.
     :return A list of messages
     """
-    messages = 0
     try:
         messages, zombies = _zombie_move(
             grid=grid,
@@ -122,10 +138,11 @@ def zombie_world(
         )
         if len(zombies) != 0:
             for i in range(len(zombies)):
-                print(len(zombies))
                 _zombie_move(
                     grid=grid,
-                    initial_position=Position(grid.dimension, zombies[i].x, zombies[i].y),
+                    initial_position=Position(
+                        grid.dimension, zombies[i].x, zombies[i].y
+                    ),
                     creatures=[],
                     move=move,
                     messages=messages,

@@ -77,18 +77,11 @@ POST http://127.0.0.1:3000/zombie_world/start
         "Creature got infected at - (1, 2)",
         "zombie 0 moved from (1, 2) to (1, 1)",
         "Creature got infected at - (1, 1)",
+        "No leftover Creatures :'(",
         "zombie 1 moved from (0, 1) to (1, 1)",
-        "zombie 1 moved from (1, 1) to (1, 2)",
-        "zombie 1 moved from (1, 2) to (2, 2)",
-        "zombie 1 moved from (2, 2) to (2, 1)",
-        "zombie 2 moved from (1, 2) to (2, 2)",
-        "zombie 2 moved from (2, 2) to (2, 3)",
-        "zombie 2 moved from (2, 3) to (3, 3)",
-        "zombie 2 moved from (3, 3) to (3, 2)",
-        "zombie 3 moved from (1, 1) to (2, 1)",
-        "zombie 3 moved from (2, 1) to (2, 2)",
-        "zombie 3 moved from (2, 2) to (3, 2)",
-        "zombie 3 moved from (3, 2) to (3, 1)"
+        ...
+        ...
+        ...
     ]
 }
 ```

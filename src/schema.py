@@ -3,6 +3,10 @@ import typing
 
 
 class ZombieWorld(BaseModel):
+    """
+    Schema for the POST request
+    """
+
     dimension: int
     position: typing.Dict[str, int]
     creatures: typing.List
